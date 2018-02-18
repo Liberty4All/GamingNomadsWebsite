@@ -1,0 +1,23 @@
+{
+  "name": "gamingnomadswebsite",
+  "version": "1.0.0",
+  "description": "Gaming Nomads online home",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liberty4All/GamingNomadsWebsite.git"
+  },
+  "keywords": [
+    "gaming",
+    "nomads"
+  ],
+  "author": "William Wallace",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liberty4All/GamingNomadsWebsite/issues"
+  },
+  "homepage": "https://github.com/Liberty4All/GamingNomadsWebsite#readme"
+}
