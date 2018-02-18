@@ -1,7 +1,12 @@
 body {
-    background: 040404
+    background-color: #040404;
 }
 
 header {
-    background-color: white 
+    background-color: white; 
+}
+
+img.branding {
+    width:20%;
+    margin-left:10%;
 }
