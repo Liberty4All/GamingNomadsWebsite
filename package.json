@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Liberty4All/GamingNomadsWebsite/issues"
   },
-  "homepage": "https://github.com/Liberty4All/GamingNomadsWebsite#readme"
+  "homepage": "https://github.com/Liberty4All/GamingNomadsWebsite#readme",
+  "dependencies": {
+    "semantic-ui": "^2.2.14"
+  }
 }
