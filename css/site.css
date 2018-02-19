@@ -1,4 +1,4 @@
-body {
+body, h2 {
     background-color: #040404;
 }
 
@@ -6,7 +6,36 @@ header {
     background-color: white; 
 }
 
+img {
+    width: 100%;
+}
+
 img.branding {
     width:20%;
     margin-left:10%;
+}
+
+h2 {
+    color:white;
+    font-family: 'Cantarell', 'Arial Narrow', sans-serif;
+    font-size: 20pt;
+    padding-left: 20%;
+}
+
+.ui.items>.artemis {
+    background-color: #06667e;
+}
+
+.ui.items>.lasertag {
+    background-color: #5a5a66;
+}
+
+.ui.items>.boardgames {
+    background-color: #4f294b;
+}
+
+.footer {
+    background-color: #222222;
+    width:100%;
+    height:150pt;  
 }
