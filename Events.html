@@ -14,6 +14,44 @@
 <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css" rel="stylesheet"/>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script language="Javascript">
+    function getEvents(){
+        var commitUrl = "http://localhost:7474/db/data/transaction/commit";
+        $.ajax({
+            type:"POST",
+            headers:{
+                'Accept':'application/json; charset=UTF-8',
+                'X-Stream': 'true',
+                'Content-Type':'application/json',
+                'Authorization': 'Basic ' + btoa('webuser:lentfish')
+            },
+            url: commitUrl,
+            data: '{"statements" : [ {"statement" : "MATCH (n:Event) RETURN n LIMIT 25"	} ]}'
+        })
+        .done(function(data){
+            console.log(JSON.stringify(data));
+            listEvents(data);
+        });
+    }
+    function listEvents(events){        
+        eventArray = events.results[0].data;
+        eventArray.forEach(event => {
+            var row = event.row[0];
+            var meta = event.meta[0];
+            $('#eventsTable > tbody:last-child').append('<tr>' +
+                '<td><a href="' + row.url + '" target="_blank">' +  row.name + '</a></td>' + 
+                '<td>' +  row.dates + '</td>' + 
+                '<td>' +  (row.games ? "Yes" : "No") + '</td>' + 
+                '<td>' +  (row.artmeis ? "Yes" : "No") + '</td>' + 
+                '<td>' +  (row.lasertag ? "Yes" : "No") + '</td>' + 
+                '</tr>');
+        });         
+    }
+    $(document).ready(function(){
+        getEvents();
+    })
+</script>
+
 </head>
 <body>
 <header style="background-color:white">
@@ -62,7 +100,7 @@
     </div>
     <div class="col-md-8">
         <h2>Look for us at these events &nbsp or &nbsp CALL (740)852-7777</h2>
-        <table class="table table-striped table-hover ">
+        <table class="table table-striped table-hover " id="eventsTable" name="eventsTable" >
             <thead>
                 <tr>
                     <th>Event</th>
@@ -72,105 +110,8 @@
                     <th>Laser Tag</th>
                 </tr>
             </thead>
-            <tbody>
-                    <tr>
-                        <td><a href="http://www.codemash.org" target="_blank">Codemash V2.0.1.7</td>
-                        <td>January 10-13</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://www.adepticon.org" target="_blank">Adepticon</td>
-                        <td>March 23 - March 26</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://armada.eochu.com/" target="_blank">Artemis Armada III</td>
-                        <td>April 7-9</td>
-                        <td>No</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://thepandorasociety.com/symposium/" target="_blank">Steampunk Symposium*</td>
-                        <td>April 28-30</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://www.therathacon.com/" target="_blank">Rathacon*</td>
-                        <td>May 13</td>
-                        <td>No</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://www.originsgamefair.com" target="_blank">Origins</td>
-                        <td>June 15-19</td>
-                        <td>No</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://www.boardgamers.org/#wbc" target="_blank">World Boardgame Championships*</td>
-                        <td>July 28-30</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://www.thatconference.com/" target="_blank">THAT Conference</td>
-                        <td>August 7-9</td>
-                        <td>No</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://www.gencon.com" target="_blank">GenCon*</td>
-                        <td>August 17-20</td>
-                        <td>No</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td><a href="Coming Soon" target="_blank">Artemis EFCon One</td>
-                        <td>September 1-3</td>
-                        <td>No</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://www.grand-con.com/registration" target="_blank">GrandCon*</td>
-                        <td>September **</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://cincitycon.com/" target="_blank">CinCityCon*</td>
-                        <td>October 6-8</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://charcon.org" target="_blank">Charcon*</td>
-                        <td>October **</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td><a href="http://www.buckeyegamefest.com/" target="_blank">BGF*</td>
-                        <td>October **</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                    </tr>
+            <tbody  >
+                   <!-- body is filled via Javascript -->
             </tbody>
         </table>
         <h4 style= font-size:10pt; font-style:bold;>*Event Confirmation Pending &nbsp &nbsp &nbsp &nbsp **Dates to be Announced</h4>
