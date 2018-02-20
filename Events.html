@@ -3,85 +3,34 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page - Gaming Nomads</title>
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
-   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css" rel="stylesheet"/>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script language="Javascript">
-    function getEvents(){
-        var commitUrl = "http://localhost:7474/db/data/transaction/commit";
-        $.ajax({
-            type:"POST",
-            headers:{
-                'Accept':'application/json; charset=UTF-8',
-                'X-Stream': 'true',
-                'Content-Type':'application/json',
-                'Authorization': 'Basic ' + btoa('webuser:lentfish')
-            },
-            url: commitUrl,
-            data: '{"statements" : [ {"statement" : "MATCH (n:Event) RETURN n LIMIT 25"	} ]}'
-        })
-        .done(function(data){
-            console.log(JSON.stringify(data));
-            listEvents(data);
-        });
-    }
-    function listEvents(events){        
-        eventArray = events.results[0].data;
-        eventArray.forEach(event => {
-            var row = event.row[0];
-            var meta = event.meta[0];
-            $('#eventsTable > tbody:last-child').append('<tr>' +
-                '<td><a href="' + row.url + '" target="_blank">' +  row.name + '</a></td>' + 
-                '<td>' +  row.dates + '</td>' + 
-                '<td>' +  (row.games ? "Yes" : "No") + '</td>' + 
-                '<td>' +  (row.artmeis ? "Yes" : "No") + '</td>' + 
-                '<td>' +  (row.lasertag ? "Yes" : "No") + '</td>' + 
-                '</tr>');
-        });         
-    }
-    $(document).ready(function(){
-        getEvents();
-    })
-</script>
-
+    <title>Events Page - Gaming Nomads</title>
 </head>
 <body>
-<header style="background-color:white">
-		<img src="images/logo.jpg" alt="logo" style="width:20%;margin-left:10%;">
-	</header>
-    <div class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" height="50" href="/" width="296"></a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/Home/About">About</a></li>
-                    <li><a href="/Home/Contact">Contact</a></li>
-                </ul>
-                
-
+    <header>
+        <img src="images/logo.jpg" alt="logo" class="branding">
+        </header>
+        <div class="ui inverted menu">
+            <a class="item" href="/">
+                Home
+            </a>
+            <a class="active item" href="/Events.html">
+                Events
+            </a>
+            <a class="item">
+                About
+            </a>
+            <a class="item">
+                Contact
+            </a>
+            <div class="right menu">
+                <a class="item">Login</a>
             </div>
         </div>
-    </div>
+    </header>
     <div class="container body-content">
 <div class="jumbotron">
     <p class="lead">&nbsp &nbsp We at Gaming Nomads are dedicated to bringing you the best in games and gaming experiences!
-</>
+<div/>
 </div>
 <div class="row">
     <div class="col-md-4">
@@ -119,7 +68,7 @@
 </div>
         <hr />
         <footer>
-            <p>&copy; 2017 - Gaming Nomads</p>
+            <p>&copy; 2018 - Gaming Nomads</p>
         </footer>
     </div>
 
@@ -128,6 +77,44 @@
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
-    <script src="semantic/dist/semantic.min.js"></script>    
+    <script src="semantic/dist/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <script language="Javascript">
+    function getEvents(){
+        var commitUrl = "http://localhost:7474/db/data/transaction/commit";
+        $.ajax({
+            type:"POST",
+            headers:{
+                'Accept':'application/json; charset=UTF-8',
+                'X-Stream': 'true',
+                'Content-Type':'application/json',
+                'Authorization': 'Basic ' + btoa('webuser:lentfish')
+            },
+            url: commitUrl,
+            data: '{"statements" : [ {"statement" : "MATCH (n:Event) RETURN n LIMIT 25"	} ]}'
+        })
+        .done(function(data){
+            console.log(JSON.stringify(data));
+            listEvents(data);
+        });
+    }
+    function listEvents(events){        
+        eventArray = events.results[0].data;
+        eventArray.forEach(event => {
+            var row = event.row[0];
+            var meta = event.meta[0];
+            $('#eventsTable > tbody:last-child').append('<tr>' +
+                '<td><a href="' + row.url + '" target="_blank">' +  row.name + '</a></td>' + 
+                '<td>' +  row.dates + '</td>' + 
+                '<td>' +  (row.games ? "Yes" : "No") + '</td>' + 
+                '<td>' +  (row.artmeis ? "Yes" : "No") + '</td>' + 
+                '<td>' +  (row.lasertag ? "Yes" : "No") + '</td>' + 
+                '</tr>');
+        });         
+    }
+    $(document).ready(function(){
+        getEvents();
+    })
+</script>
 </body>
 </html>
