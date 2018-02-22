@@ -72,7 +72,8 @@
                             <th>Laser Tag</th>
                         </tr>
                     </thead>
-                    <tbody  >
+                    <tbody>
+                        
                     <!-- body is filled via Javascript -->
                     </tbody>
                     <tfoot>
@@ -121,41 +122,51 @@
                 listEvents(data);
             });
         }
+
         function listEvents(events){        
-            eventArray = events.results[0].data;
+            eventArray = events.results[0].data[0].row;
             eventArray.forEach(event => {
-                var row = event.row[0];
-                var meta = event.meta[0];
-                $('#eventsTable > tbody:last-child').append('<tr>' +
-                    '<td><a href="' + row.url + '" target="_blank">' +  row.name + '</a></td>' + 
-                    '<td>' +  row.dates + '</td>' + 
-                    '<td>' +  (row.games ? "Yes" : "No") + '</td>' + 
-                    '<td>' +  (row.artmeis ? "Yes" : "No") + '</td>' + 
-                    '<td>' +  (row.lasertag ? "Yes" : "No") + '</td>' + 
-                    '</tr>');
-        });         
-    }
-
-    $(document).ready(function(){
-        //getEvents();
-
-        events = {
-            results: [{
-                data: [{
-                    row:[{
-                    url:'http://gamingnomads.com',
-                    name:'Gaming Nomads Con',
-                    dates: 'October 19th',
-                    games: true,
-                    artmeis: true,
-                    lasertag: false
-                    }]
-                }]
-            }] 
+                //var row = event.row[0];
+                //var meta = event.meta[0];
+                var result = '<tr>';
+                result += '<td><a href="' + event.url + '" target="_blank">' +  event.name + '</a></td>';
+                result += '<td>' +  event.dates + '</td>';
+                result += '<td>' +  (event.games ? "Yes" : "No") + '</td>';
+                result += '<td>' +  (event.artemis ? "Yes" : "No") + '</td>';
+                result += '<td>' +  (event.lasertag ? "Yes" : "No") + '</td>';
+                result += '</tr>';
+                $('#eventsTable > tbody').append(result);
+            });         
         }
-        console.log(events.results[0].data);
-        //listEvents(events);
-    })
+
+        $(document).ready(function(){
+            //getEvents();
+
+            events = {
+                "results" : [ {
+                    "columns": ["n"],
+                    "data" : [ {
+                        "row" : [ {
+                            "url" : "http://www.codemash.org",
+                            "name" : "Codemash V2.0.1.8",
+                            "dates" : "January 9-12",
+                            "games" : true,
+                            "artemis" : true,
+                            "lasertag" : true
+                        },
+                        {
+                            "url" : "http://awh.net",
+                            "name" : "AWH Teambuilding (Private)",
+                            "dates" : "January 15",
+                            "games" : false,
+                            "artemis" : true,
+                            "lasertag" : false
+                        } ]
+                    } ]
+                } ] 
+            };
+            listEvents(events);
+        })
     </script>
 </body>
 </html>
