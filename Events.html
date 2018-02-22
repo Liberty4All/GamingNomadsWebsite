@@ -7,114 +7,155 @@
 </head>
 <body>
     <header>
-        <img src="images/logo.jpg" alt="logo" class="branding">
-        </header>
-        <div class="ui inverted menu">
-            <a class="item" href="/">
-                Home
-            </a>
-            <a class="active item" href="/Events.html">
-                Events
-            </a>
-            <a class="item">
-                About
-            </a>
-            <a class="item">
-                Contact
-            </a>
-            <div class="right menu">
-                <a class="item">Login</a>
+        <div class="ui grid">
+            <div class="row">
+                <div class="ui three wide right aligned column">
+                    <img src="images/logo.jpg" alt="logo">
+                </div>
+                <div class="ui thirteen wide column">
+                    <p class="ui center aligned large header"><br>We are dedicated to bringing you the best in games and gaming experiences!</p>
+                </div>
             </div>
         </div>
     </header>
-    <div class="container body-content">
-<div class="jumbotron">
-    <p class="lead">&nbsp &nbsp We at Gaming Nomads are dedicated to bringing you the best in games and gaming experiences!
-<div/>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <br />
-		<img src="images/artemis_station.jpg" alt="team" style="width:85%;margin-left:10%;">
-		
-        <p style="margin:15pt; font-size:10pt; font-style:italic">
-            "Gaming Nomads make amazing improvements to the game play. They take this stuff serious! 
-			And the simulation is serious too! It brings a whole new level to team oriented gaming, and 
-			your team will need a strong leader with the skills necessary to rally his or her crew to victory."
-		 </p>
-		<p style= "margin-left:15pt; font-size:10pt; font-style:italic">
-			- Brent C. (Columbus, Oh)
-        </p>
-		
-    </div>
-    <div class="col-md-8">
-        <h2>Look for us at these events &nbsp or &nbsp CALL (740)852-7777</h2>
-        <table class="table table-striped table-hover " id="eventsTable" name="eventsTable" >
-            <thead>
-                <tr>
-                    <th>Event</th>
-                    <th>Dates</th>
-                    <th>Games</th>
-                    <th>Artemis</th>
-                    <th>Laser Tag</th>
-                </tr>
-            </thead>
-            <tbody  >
-                   <!-- body is filled via Javascript -->
-            </tbody>
-        </table>
-        <h4 style= font-size:10pt; font-style:bold;>*Event Confirmation Pending &nbsp &nbsp &nbsp &nbsp **Dates to be Announced</h4>
-    </div>
-</div>
-        <hr />
+    <div class="ui grid container">
+        <div class="row">
+            <div class="ui inverted six item menu">
+                <a class="item" href="/">
+                    Home
+                </a>
+                <a class="active item" href="/Events.html">
+                    Events
+                </a>
+                <a class="item">
+                    About
+                </a>
+                <a class="item">
+                    Contact
+                </a>
+                <div class="item">            
+                </div>
+                <a class="item">Login</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="five wide left floated column">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="images/artemis_station.jpg" alt="team">
+                    </div>
+                    <div class="content">
+                        <div class="description">
+                            <p style="margin:15pt; font-size:10pt; font-style:italic">
+                                "Gaming Nomads make amazing improvements to the game play. They take this stuff serious! 
+			                    And the simulation is serious too! It brings a whole new level to team oriented gaming, and 
+			                    your team will need a strong leader with the skills necessary to rally his or her crew to victory."
+                            </p>                        
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <p style= "margin-left:15pt; font-size:10pt; font-style:italic">
+		                    - Brent C. (Columbus, Oh)
+                        </p>
+                    </div>		    
+                </div>
+            </div>
+            <div class="eleven wide column">
+                <h2>Look for us at these events &nbsp or &nbsp Contact Us</h2>
+                <table class="ui inverted striped table" id="eventsTable" name="eventsTable" >
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Dates</th>
+                            <th>Games</th>
+                            <th>Artemis</th>
+                            <th>Laser Tag</th>
+                        </tr>
+                    </thead>
+                    <tbody  >
+                    <!-- body is filled via Javascript -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">
+                                <h4 style= font-size:10pt; font-style:bold;>*Event Confirmation Pending</h4>
+                            </th>
+                            <th colspan="3">
+                                <h4 style= font-size:10pt; font-style:bold;>**Dates to be Announced</h4>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>            
+            </div>
+        </div>
         <footer>
-            <p>&copy; 2018 - Gaming Nomads</p>
+            <div class="ui horizontal divider">
+                <div class="ui label">&copy; 2018 - Gaming Nomads</div>
+            </div>        
         </footer>
     </div>
 
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
     <script src="semantic/dist/semantic.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/site.css">
     <script language="Javascript">
-    function getEvents(){
-        var commitUrl = "http://localhost:7474/db/data/transaction/commit";
-        $.ajax({
-            type:"POST",
-            headers:{
-                'Accept':'application/json; charset=UTF-8',
-                'X-Stream': 'true',
-                'Content-Type':'application/json',
-                'Authorization': 'Basic ' + btoa('webuser:lentfish')
-            },
-            url: commitUrl,
-            data: '{"statements" : [ {"statement" : "MATCH (n:Event) RETURN n LIMIT 25"	} ]}'
-        })
-        .done(function(data){
-            console.log(JSON.stringify(data));
-            listEvents(data);
-        });
-    }
-    function listEvents(events){        
-        eventArray = events.results[0].data;
-        eventArray.forEach(event => {
-            var row = event.row[0];
-            var meta = event.meta[0];
-            $('#eventsTable > tbody:last-child').append('<tr>' +
-                '<td><a href="' + row.url + '" target="_blank">' +  row.name + '</a></td>' + 
-                '<td>' +  row.dates + '</td>' + 
-                '<td>' +  (row.games ? "Yes" : "No") + '</td>' + 
-                '<td>' +  (row.artmeis ? "Yes" : "No") + '</td>' + 
-                '<td>' +  (row.lasertag ? "Yes" : "No") + '</td>' + 
-                '</tr>');
+        function getEvents(){
+            var commitUrl = "http://localhost:7474/db/data/transaction/commit";
+            $.ajax({
+                type:"POST",
+                headers:{
+                    'Accept':'application/json; charset=UTF-8',
+                    'X-Stream': 'true',
+                    'Content-Type':'application/json',
+                    'Authorization': 'Basic ' + btoa('webuser:lentfish')
+                },
+                url: commitUrl,
+                data: '{"statements" : [ {"statement" : "MATCH (n:Event) RETURN n LIMIT 25"	} ]}'
+            })
+            .done(function(data){
+                console.log(JSON.stringify(data));
+                listEvents(data);
+            });
+        }
+        function listEvents(events){        
+            eventArray = events.results[0].data;
+            eventArray.forEach(event => {
+                var row = event.row[0];
+                var meta = event.meta[0];
+                $('#eventsTable > tbody:last-child').append('<tr>' +
+                    '<td><a href="' + row.url + '" target="_blank">' +  row.name + '</a></td>' + 
+                    '<td>' +  row.dates + '</td>' + 
+                    '<td>' +  (row.games ? "Yes" : "No") + '</td>' + 
+                    '<td>' +  (row.artmeis ? "Yes" : "No") + '</td>' + 
+                    '<td>' +  (row.lasertag ? "Yes" : "No") + '</td>' + 
+                    '</tr>');
         });         
     }
+
     $(document).ready(function(){
-        getEvents();
+        //getEvents();
+
+        events = {
+            results: [{
+                data: [{
+                    row:[{
+                    url:'http://gamingnomads.com',
+                    name:'Gaming Nomads Con',
+                    dates: 'October 19th',
+                    games: true,
+                    artmeis: true,
+                    lasertag: false
+                    }]
+                }]
+            }] 
+        }
+        console.log(events.results[0].data);
+        //listEvents(events);
     })
-</script>
+    </script>
 </body>
 </html>
