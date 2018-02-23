@@ -65,6 +65,7 @@
                 <table class="ui inverted striped table" id="eventsTable" name="eventsTable" >
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Event</th>
                             <th>Dates</th>
                             <th>Games</th>
@@ -79,10 +80,10 @@
                     <tfoot>
                         <tr>
                             <th colspan="2">
-                                <h4 style= font-size:10pt; font-style:bold;>*Event Confirmation Pending</h4>
+                                <h4 style= font-size:10pt; font-style:bold;><i class="bookmark outline icon"></i>Event Confirmation Pending</h4>
                             </th>
                             <th colspan="3">
-                                <h4 style= font-size:10pt; font-style:bold;>**Dates to be Announced</h4>
+                                <h4 style= font-size:10pt; font-style:bold;><i class="calendar alternate outline icon"></i>Dates to be Announced</h4>
                             </th>
                         </tr>
                     </tfoot>
@@ -129,8 +130,9 @@
                 //var row = event.row[0];
                 //var meta = event.meta[0];
                 var result = '<tr>';
+                result += '<td>' + (event.booked ? '' : '<i class="bookmark outline icon"></i>') + '</td>';
                 result += '<td><a href="' + event.url + '" target="_blank">' +  event.name + '</a></td>';
-                result += '<td>' +  event.dates + '</td>';
+                result += '<td>' +  (event.dates === '' ? '<i class="calendar alternate outline icon"></i>' : event.dates) + '</td>';
                 result += '<td>' +  (event.games ? "Yes" : "No") + '</td>';
                 result += '<td>' +  (event.artemis ? "Yes" : "No") + '</td>';
                 result += '<td>' +  (event.lasertag ? "Yes" : "No") + '</td>';
@@ -139,10 +141,8 @@
             });         
         }
 
-        $(document).ready(function(){
-            //getEvents();
-
-            events = {
+        function getTestEvents() {
+            var results = {
                 "results" : [ {
                     "columns": ["n"],
                     "data" : [ {
@@ -150,6 +150,7 @@
                             "url" : "http://www.codemash.org",
                             "name" : "Codemash V2.0.1.8",
                             "dates" : "January 9-12",
+                            "booked" : true,
                             "games" : true,
                             "artemis" : true,
                             "lasertag" : true
@@ -158,13 +159,120 @@
                             "url" : "http://awh.net",
                             "name" : "AWH Teambuilding (Private)",
                             "dates" : "January 15",
+                            "booked" : true,
                             "games" : false,
+                            "artemis" : true,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "http://www.adepticon.org/",
+                            "name" : "Adepticon",
+                            "dates" : "March 22-25",
+                            "booked" : true,
+                            "games" : true,
+                            "artemis" : true,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "https://artemisspaceshipbridge.com/armada-2018",
+                            "name" : "Artemis Armada IV",
+                            "dates" : "April 6-8",
+                            "booked" : true,
+                            "games" : false,
+                            "artemis" : true,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "https://lexicongaming.com/",
+                            "name" : "LexiCon",
+                            "dates" : "April 20-22",
+                            "booked" : true,
+                            "games" : true,
+                            "artemis" : false,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "https://www.therathacon.com/",
+                            "name" : "Rathacon",
+                            "dates" : "May 12",
+                            "booked" : false,
+                            "games" : false,
+                            "artemis" : true,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "http://originsgamefair.com/",
+                            "name" : "Origins",
+                            "dates" : "June 13-17",
+                            "booked" : true,
+                            "games" : false,
+                            "artemis" : true,
+                            "lasertag" : true
+                        },
+                        {
+                            "url" : "https://charcon.org",
+                            "name" : "Charcon",
+                            "dates" : "July 13-15",
+                            "booked" : false,
+                            "games" : true,
+                            "artemis" : true,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "https://www.boardgamers.org/wbcindex.html",
+                            "name" : "World Boardgaming Championships",
+                            "dates" : "July 25-29",
+                            "booked" : false,
+                            "games" : true,
+                            "artemis" : false,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "http://gencon.com",
+                            "name" : "GenCon",
+                            "dates" : "August 2-5",
+                            "booked" : true,
+                            "games" : false,
+                            "artemis" : false,
+                            "lasertag" : true
+                        },
+                        {
+                            "url" : "http://www.thatconference.com",
+                            "name" : "THAT Conference",
+                            "dates" : "August 6-8",
+                            "booked" : true,
+                            "games" : false,
+                            "artemis" : true,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "http://www.buckeyegamefest.com",
+                            "name" : "Buckey Game Fest",
+                            "dates" : "September 13-16",
+                            "booked" : true,
+                            "games" : true,
+                            "artemis" : true,
+                            "lasertag" : false
+                        },
+                        {
+                            "url" : "http://cincitycon.com",
+                            "name" : "CinCityCon",
+                            "dates" : "October 12-14",
+                            "booked" : false,
+                            "games" : true,
                             "artemis" : true,
                             "lasertag" : false
                         } ]
                     } ]
                 } ] 
             };
+            return results;
+        }
+
+        $(document).ready(function(){
+            //getEvents();
+
+            events = getTestEvents();
             listEvents(events);
         })
     </script>
