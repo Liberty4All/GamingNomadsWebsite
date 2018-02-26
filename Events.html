@@ -106,29 +106,23 @@
     <link rel="stylesheet" type="text/css" href="css/site.css">
     <script language="Javascript">
         function getEvents(){
-            var commitUrl = "http://localhost:7474/db/data/transaction/commit";
+            var commitUrl = "https://functions-gamingnomads-gets.azurewebsites.net/api/getData/Events";
             $.ajax({
-                type:"POST",
+                type:"GET",
                 headers:{
                     'Accept':'application/json; charset=UTF-8',
                     'X-Stream': 'true',
-                    'Content-Type':'application/json',
-                    'Authorization': 'Basic ' + btoa('webuser:lentfish')
+                    'Content-Type':'application/json'
                 },
-                url: commitUrl,
-                data: '{"statements" : [ {"statement" : "MATCH (n:Event) RETURN n LIMIT 25"	} ]}'
+                url: commitUrl
             })
             .done(function(data){
-                console.log(JSON.stringify(data));
                 listEvents(data);
             });
         }
 
         function listEvents(events){        
-            eventArray = events.results[0].data[0].row;
-            eventArray.forEach(event => {
-                //var row = event.row[0];
-                //var meta = event.meta[0];
+            events.forEach(event => {
                 var result = '<tr>';
                 result += '<td>' + (event.booked ? '' : '<i class="bookmark outline icon"></i>') + '</td>';
                 result += '<td><a href="' + event.url + '" target="_blank">' +  event.name + '</a></td>';
@@ -270,10 +264,7 @@
         }
 
         $(document).ready(function(){
-            //getEvents();
-
-            events = getTestEvents();
-            listEvents(events);
+            getEvents();
         })
     </script>
 </body>
