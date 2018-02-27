@@ -20,13 +20,22 @@
     </header>
     <div class="ui grid container">
         <div class="row">
-            <div class="ui inverted six item menu">
+            <div class="ui inverted seven item menu">
                 <a class="item" href="/">
                     Home
                 </a>
                 <a class="active item" href="/Events.html">
                     Events
                 </a>
+                <div class="ui simple dropdown item">
+                    Services
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="inverted item">Artemis SBS</a>
+                        <a class="inverted item">Tactical Laser Tag</a>
+                        <a class="inverted item">Tabletop Games</a>
+                    </div>
+                </div>
                 <a class="item">
                     About
                 </a>
@@ -74,7 +83,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
                     <!-- body is filled via Javascript -->
                     </tbody>
                     <tfoot>
@@ -88,6 +96,9 @@
                         </tr>
                     </tfoot>
                 </table>            
+                <div class="ui active dimmer">
+                    <div class="ui text loader">Loading...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -117,6 +128,7 @@
                 url: commitUrl
             })
             .done(function(data){
+                $('.dimmer').removeClass('active');
                 listEvents(data);
             });
         }
